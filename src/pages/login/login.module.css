@@ -1,0 +1,42 @@
+.content {
+  padding-top: 80px;
+}
+
+.form {
+  margin: 0 auto;
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  max-width: 320px;
+  background: var(--main-card-color);
+  box-shadow: 0px 3px 8px rgba(9, 30, 66, 0.16), 0px 0px 1px rgba(9, 30, 66, 0.31);
+  border-radius: 4px;
+}
+
+.title {
+  margin: 0 0 16px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.input {
+  margin-bottom: 12px;
+  min-width: 100%;
+}
+.input:last-of-type {
+  margin-bottom: 0;
+}
+
+.button {
+  margin-top: 24px;
+}
+
+@media screen and (max-width: 360px) {
+  .form {
+    padding: 24px 16px;
+    max-width: 280px;
+  }  
+}

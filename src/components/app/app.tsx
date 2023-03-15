@@ -1,7 +1,11 @@
+import Login from "../../pages/login/login";
+import Header from "../header/header";
+
 function App() {
   return (
     <div>
-      <p>hello</p>
+      <Header></Header>
+      <Login></Login>
     </div>
   );
 }
