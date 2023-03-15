@@ -5,7 +5,11 @@ import { response } from '../../utils/mock-api';
 function Main() {
   return (
     <main>
-      <DataCard data={response.data[0]} />
+      <section className={styles.cards}>
+        {response.data.map((item) => (
+          <DataCard key={item.id} data={item} />
+        ))}
+      </section>
     </main>
   )
 }

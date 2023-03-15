@@ -10,7 +10,7 @@ function DataCard(props: IDataCardProps) {
   const { data } = props;
 
   return (
-    <section className={styles.content}>
+    <article className={styles.content}>
       <div className={styles.statusWrap}>
         <p className={styles.status}>{data.documentStatus}</p>
         <p className={styles.text}>{`№ ${data.employeeNumber}`}</p>
@@ -27,7 +27,7 @@ function DataCard(props: IDataCardProps) {
           <p className={`${styles.text} ${styles.mt8}`}>{convertDate(data.companySigDate)}</p>
         </li>
       </ul>
-    </section>
+    </article>
   );
 }
 
