@@ -1,0 +1,73 @@
+.content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  max-width: 320px;
+  background: var(--main-card-color);
+  box-shadow: 0px 3px 8px rgba(9, 30, 66, 0.16),
+    0px 0px 1px rgba(9, 30, 66, 0.31);
+  border-radius: 4px;
+}
+
+.statusWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status {
+  margin: 0;
+  padding: 8px;
+  background-color: var(--label-color);
+  border-radius: 4px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.2;
+  color: var(--text-label-color);
+}
+
+.text {
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.2;
+  color: var(--text-color);
+}
+
+.title {
+  margin: 24px 0 16px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.2;
+  color: var(--text-color);
+}
+
+.list {
+  margin: 24px 0 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+}
+
+.listItem {
+  margin-right: 24px;
+}
+.listItem:last-of-type {
+  margin-right: 0;
+}
+
+.mt8 {
+  margin-top: 8px;
+}
+
+@media screen and (max-width: 360px) {
+  .content {
+    padding: 16px;
+    max-width: 280px;
+  }
+}

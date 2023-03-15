@@ -4,6 +4,9 @@
   --main-bg-color: #f0eff4;
   --main-card-color: #fff;
   --header-color: #3b82f6;
+  --label-color: #dbeafe;
+  --text-label-color: #2563eb;
+  --text-color: #475569;
 }
 
 body {
