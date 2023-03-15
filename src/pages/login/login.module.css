@@ -35,6 +35,10 @@
 }
 
 @media screen and (max-width: 360px) {
+  .content {
+    padding-top: 60px;
+  }
+
   .form {
     padding: 24px 16px;
     max-width: 280px;

@@ -6,9 +6,15 @@ function Login() {
     <main className={styles.content}>
       <form className={styles.form}>
         <h1 className={styles.title}>Вход</h1>
-        <TextField className={styles.input} label="Имя пользователя" variant="filled" />
+        <TextField
+          className={styles.input}
+          label="Имя пользователя"
+          variant="filled"
+        />
         <TextField className={styles.input} label="Пароль" variant="filled" />
-        <Button className={styles.button} variant="contained">Вход</Button>
+        <Button className={styles.button} variant="contained">
+          Вход
+        </Button>
       </form>
     </main>
   );
