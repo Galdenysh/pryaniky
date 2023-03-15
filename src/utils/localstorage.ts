@@ -12,14 +12,14 @@ export function setWithExpiry(key: string, value: string, ttl: number) {
 export function getWithExpiry(key: string) {
 	const itemStr = localStorage.getItem(key)
 
-	// если зачение нет, вернем null
+	// если зачения нет, вернем null
 	if (!itemStr) {
 		return null
 	}
 	const item = JSON.parse(itemStr)
 	const now = new Date()
 
-	// сравнивем время истечения срока с текущим временем
+	// сравниваем время истечения срока с текущим временем
 	if (now.getTime() > item.expiry) {
 		// если срок истек, удалим значение и вернем null
 		localStorage.removeItem(key)

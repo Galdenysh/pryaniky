@@ -1,6 +1,6 @@
 import { HOST } from "./constants";
 import { getWithExpiry } from "./localstorage";
-import { ILoginData } from "./types";
+import { ILoginData, IResponseData } from "./types";
 
 const checkResponse = (res: Response) => {
   if (res.ok) return res.json();
@@ -28,3 +28,13 @@ export const singIn = (data: ILoginData) => {
 
   return request('/ru/data/v3/testmethods/docs/login', options);
 };
+
+// GetData
+export const getData = () => {
+  const options = {
+    method: 'GET',
+    headers: headersAuthorization(),
+  };
+
+  return request('/ru/data/v3/testmethods/docs/userdocs/get', options);
+}

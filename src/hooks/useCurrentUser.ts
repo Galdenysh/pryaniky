@@ -10,10 +10,12 @@ interface ICurrentUserContext {
   setCurrentUser: (value: React.SetStateAction<ICurrentUser>) => void;
 }
 
+// Контекст с данными о пользователе
 export const CurrentUserContext = createContext<ICurrentUserContext | null>(
   null,
 );
 
+// Кастомный хук с проверкой на использования <CurrentUserContext.Provider>
 export const useCurrentUser = () => {
   const currentUserContext = useContext(CurrentUserContext);
 
