@@ -4,13 +4,14 @@ import styles from './data-card.module.css';
 
 interface IDataCardProps {
   data: IData;
+  onClick: () => void;
 }
 
 function DataCard(props: IDataCardProps) {
-  const { data } = props;
+  const { data, onClick } = props;
 
   return (
-    <article className={styles.content}>
+    <article className={styles.content} onClick={onClick}>
       <div className={styles.statusWrap}>
         <p className={styles.status}>{data.documentStatus}</p>
         <p className={styles.text}>{`№ ${data.employeeNumber}`}</p>

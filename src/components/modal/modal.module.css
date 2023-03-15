@@ -1,0 +1,52 @@
+.container {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  max-width: 90%;
+  max-height: 90%;
+  background-color: var(--main-card-color);
+  box-sizing: border-box;
+  box-shadow: 0px 3px 8px rgba(9, 30, 66, 0.16),
+    0px 0px 1px rgba(9, 30, 66, 0.31);
+  border-radius: 4px;
+  overflow: hidden;
+  overflow-y: auto;
+  z-index: 1001;
+
+  /* Скролл бар для firefox */
+  scrollbar-color: #828f9b #eff1f6;
+  scrollbar-width: thin;
+}
+/* Cкролл бар для chrome */
+.container::-webkit-scrollbar {
+  width: 8px;
+}
+.container::-webkit-scrollbar-track {
+  background-color: #eff1f6;
+}
+.container::-webkit-scrollbar-thumb {
+  background-color: #828f9b;
+}
+
+.overlay {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 100%;
+  min-width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.popup {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  min-width: 100%;
+  z-index: 1000;
+}
