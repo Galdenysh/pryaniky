@@ -1,15 +1,34 @@
 import { Route, Routes } from 'react-router';
-import Login from '../../pages/login/login';
-import Main from '../../pages/main/main';
 import Header from '../header/header';
 import ProtectedRoute from '../protected-route/protected-route';
-import { links } from '../../utils/constants';
+import Login from '../../pages/login/login';
+import Main from '../../pages/main/main';
 import NotFound from '../../pages/not-found/not-found';
+import { links } from '../../utils/constants';
+import { useEffect, useState } from 'react';
+import { CurrentUserContext } from '../../hooks/useCurrentUser';
+import { getWithExpiry } from '../../utils/localstorage';
 
 function App() {
+  const [currentUser, setCurrentUser] = useState({
+    username: '',
+    loggedIn: false,
+  });
+
+  useEffect(() => {
+    const userName = getWithExpiry('user');
+
+    if (userName) {
+      setCurrentUser({
+        username: userName,
+        loggedIn: true,
+      })
+    }
+  }, []);
+
   return (
-    <>
-      <Header></Header>
+    <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
+      <Header />
       <Routes>
         <Route
           path={links.login}
@@ -29,7 +48,7 @@ function App() {
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </CurrentUserContext.Provider>
   );
 }
 

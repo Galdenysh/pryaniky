@@ -1,5 +1,5 @@
 import { useLocation, Navigate } from "react-router-dom";
-import { userData } from "../../utils/mock-api";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
 
 interface ProtectedRouteProps {
   anonymous: boolean;
@@ -11,12 +11,13 @@ function ProtectedRoute(props: ProtectedRouteProps) {
   const location = useLocation();
   const state = location.state as { from: Location };
   const fromPage = state?.from?.pathname || "/";
+  const context = useCurrentUser();
 
-  if (!anonymous && !userData.loggedIn) {
+  if (!anonymous && !context.currentUser.loggedIn) {
     return <Navigate to="/login" state={{ from: location }} />;
   }
 
-  if (anonymous && userData.loggedIn) {
+  if (anonymous && context.currentUser.loggedIn) {
     return <Navigate to={fromPage} />;
   }
 

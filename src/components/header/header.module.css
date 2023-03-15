@@ -1,6 +1,7 @@
 .content {
   padding: 0 40px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   height: 80px;
   background: var(--header-color);
