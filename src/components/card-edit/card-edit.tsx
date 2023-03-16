@@ -7,8 +7,8 @@ interface ICardEditProps {
   data: IData;
   handleSubmit: (
     evt: FormEvent<HTMLFormElement>,
-    id: string | undefined,
     newData: ISetData,
+    id?: string,
   ) => Promise<void>;
   error?: boolean;
   textError?: string;
@@ -80,7 +80,7 @@ function CardEdit(props: ICardEditProps) {
   return (
     <form
       className={styles.form}
-      onSubmit={(evt) => handleSubmit(evt, data.id, newData)}
+      onSubmit={(evt) => handleSubmit(evt, newData, data.id)}
     >
       {error && <p className={styles.textErr}>{`Ошибка. ${textError}`}</p>}
       <TextField

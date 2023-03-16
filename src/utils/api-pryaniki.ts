@@ -39,6 +39,17 @@ export function getData() {
   return request('/ru/data/v3/testmethods/docs/userdocs/get', options);
 }
 
+// Запрос для добавления записи (метод - POST):
+export function createData(data: ISetData) {
+  const options = {
+    method: 'POST',
+    headers: headersAuthorization(),
+    body: JSON.stringify(data),
+  };
+
+  return request(`/ru/data/v3/testmethods/docs/userdocs/create`, options);
+}
+
 // Запрос для изменения записи(метод POST):
 export function setData(id: string, data: ISetData) {
   const options = {

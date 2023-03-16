@@ -1,3 +1,9 @@
+.content {
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+}
+
 .cards {
   padding: 60px 40px;
   display: grid;
@@ -6,7 +12,15 @@
   gap: 24px;
 }
 
+.button {
+  margin: 0 auto;
+}
+
 @media screen and (max-width: 360px) {
+  .content {
+    padding-top: 40px;
+  }
+
   .cards {
     padding: 40px 20px;
   }
