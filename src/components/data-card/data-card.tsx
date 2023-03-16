@@ -11,10 +11,11 @@ interface IDataCardProps {
     evt: MouseEvent<HTMLButtonElement>,
     id: string | undefined,
   ) => Promise<void>;
+  padding: boolean;
 }
 
 function DataCard(props: IDataCardProps) {
-  const { data, onClick, handleRemove } = props;
+  const { data, onClick, handleRemove, padding } = props;
 
   return (
     <article className={styles.content} onClick={onClick}>
@@ -43,8 +44,9 @@ function DataCard(props: IDataCardProps) {
         color="error"
         variant="contained"
         onClick={(evt) => handleRemove(evt, data.id)}
+        disabled={padding}
       >
-        Удалить
+        {padding ? 'Удаление...' : 'Удалить'}
       </Button>
     </article>
   );

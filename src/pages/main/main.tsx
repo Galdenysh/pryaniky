@@ -27,6 +27,7 @@ function Main() {
   const [textErrorMain, setTextErrorMain] = useState<string>('');
   const [errorMain, setErrorMain] = useState<boolean>(false);
   const [handleType, setHandleType] = useState<'create' | 'set'>('create');
+  const [padding, setPadding] = useState<boolean>(false);
 
   const closePopup = () => {
     setVisible(false);
@@ -54,23 +55,26 @@ function Main() {
     evt.preventDefault();
 
     try {
+      setPadding(true);
       const response = (await createData(newData)) as IResponseSet;
 
       switch (response.error_code) {
         case 0:
           setCardsData([...cardsData, response.data]);
-
+          setPadding(false);
           closePopup();
           break;
         default:
           setError(true);
           setTextError(`Код ошибки ${response.error_code}`);
+          setPadding(false);
 
           break;
       }
     } catch (error) {
       setError(true);
       setTextError('Произошла ошибка запроса');
+      setPadding(false);
       console.error(error);
     }
   };
@@ -84,23 +88,28 @@ function Main() {
 
     if (id) {
       try {
+        setPadding(true);
         const response = (await deleteData(id)) as IResponseSet;
 
         switch (response.error_code) {
           case 0:
             const newArr = cardsData.filter((item) => item.id !== id);
+
             setCardsData([...newArr]);
+            setPadding(false);
 
             break;
           default:
             setErrorMain(true);
             setTextErrorMain(`Код ошибки ${response.error_code}`);
+            setPadding(false);
 
             break;
         }
       } catch (error) {
         setErrorMain(true);
         setTextErrorMain('Произошла ошибка запроса');
+        setPadding(false);
         console.error(error);
       }
     }
@@ -116,6 +125,7 @@ function Main() {
 
     try {
       if (id) {
+        setPadding(true);
         const response = (await setData(id, newData)) as IResponseSet;
 
         switch (response.error_code) {
@@ -123,12 +133,13 @@ function Main() {
             const newArr = cardsData.filter((item) => item.id !== id);
 
             setCardsData([...newArr, response.data]);
-
+            setPadding(false);
             closePopup();
             break;
           default:
             setError(true);
             setTextError(`Код ошибки ${response.error_code}`);
+            setPadding(false);
 
             break;
         }
@@ -136,10 +147,12 @@ function Main() {
     } catch (error) {
       setError(true);
       setTextError('Произошла ошибка запроса');
+      setPadding(false);
       console.error(error);
     }
   };
 
+  // Получение данных с сервера
   useEffect(() => {
     async function fetchData() {
       try {
@@ -184,6 +197,7 @@ function Main() {
               data={item}
               onClick={() => openPopup(item)}
               handleRemove={handleRemove}
+              padding={padding}
             />
           ))}
         </section>
@@ -197,6 +211,7 @@ function Main() {
             handleSubmit={
               handleType === 'create' ? handleCreateSubmit : handleSetSubmit
             }
+            padding={padding}
             error={error}
             textError={textError}
           />

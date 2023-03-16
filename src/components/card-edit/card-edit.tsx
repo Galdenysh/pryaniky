@@ -10,12 +10,13 @@ interface ICardEditProps {
     newData: ISetData,
     id?: string,
   ) => Promise<void>;
+  padding: boolean;
   error?: boolean;
   textError?: string;
 }
 
 function CardEdit(props: ICardEditProps) {
-  const { data, handleSubmit, error = false, textError = '' } = props;
+  const { data, handleSubmit, padding, error = false, textError = '' } = props;
   const [documentStatus, setDocumentStatus] = useState<string>('');
   const [employeeNumber, setEmployeeNumber] = useState<string>('');
   const [documentType, setDocumentType] = useState<string>('');
@@ -151,9 +152,9 @@ function CardEdit(props: ICardEditProps) {
         className={styles.button}
         type="submit"
         variant="contained"
-        disabled={emptyInput}
+        disabled={padding || emptyInput}
       >
-        Отправить
+        {padding ? 'Отправление...' : 'Отправить'}
       </Button>
     </form>
   );
