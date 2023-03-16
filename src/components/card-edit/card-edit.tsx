@@ -1,14 +1,21 @@
 import { Button, TextField } from '@mui/material';
 import { FormEvent, useEffect, useState } from 'react';
-import { IData } from '../../utils/types';
+import { IData, ISetData } from '../../utils/types';
 import styles from './card-edit.module.css';
 
 interface ICardEditProps {
   data: IData;
+  handleSubmit: (
+    evt: FormEvent<HTMLFormElement>,
+    id: string | undefined,
+    newData: ISetData,
+  ) => Promise<void>;
+  error?: boolean;
+  textError?: string;
 }
 
 function CardEdit(props: ICardEditProps) {
-  const { data } = props;
+  const { data, handleSubmit, error = false, textError = '' } = props;
   const [documentStatus, setDocumentStatus] = useState<string>('');
   const [employeeNumber, setEmployeeNumber] = useState<string>('');
   const [documentType, setDocumentType] = useState<string>('');
@@ -20,9 +27,16 @@ function CardEdit(props: ICardEditProps) {
   const [companySigDate, setCompanySigDate] = useState<string>('');
   const [emptyInput, setEmptyInput] = useState<boolean>(true);
 
-  const handleSubmit = async (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-
+  const newData = {
+    documentStatus,
+    employeeNumber,
+    documentType,
+    documentName,
+    employeeSignatureName,
+    employeeSigDate,
+    companySignatureName,
+    companySigDate,
+    emptyInput,
   };
 
   useEffect(() => {
@@ -64,13 +78,18 @@ function CardEdit(props: ICardEditProps) {
   ]);
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form
+      className={styles.form}
+      onSubmit={(evt) => handleSubmit(evt, data.id, newData)}
+    >
+      {error && <p className={styles.textErr}>{`Ошибка. ${textError}`}</p>}
       <TextField
         className={styles.input}
         label="Введите статус"
         variant="outlined"
         value={documentStatus}
         onChange={(evt) => setDocumentStatus(evt.target.value)}
+        error={error}
       />
       <TextField
         className={styles.input}
@@ -78,6 +97,7 @@ function CardEdit(props: ICardEditProps) {
         variant="outlined"
         value={employeeNumber}
         onChange={(evt) => setEmployeeNumber(evt.target.value)}
+        error={error}
       />
       <TextField
         className={styles.input}
@@ -85,6 +105,7 @@ function CardEdit(props: ICardEditProps) {
         variant="outlined"
         value={documentType}
         onChange={(evt) => setDocumentType(evt.target.value)}
+        error={error}
       />
       <TextField
         className={styles.input}
@@ -92,6 +113,7 @@ function CardEdit(props: ICardEditProps) {
         variant="outlined"
         value={documentName}
         onChange={(evt) => setDocumentName(evt.target.value)}
+        error={error}
       />
       <TextField
         className={styles.input}
@@ -99,6 +121,7 @@ function CardEdit(props: ICardEditProps) {
         variant="outlined"
         value={employeeSignatureName}
         onChange={(evt) => setEmployeeSignatureName(evt.target.value)}
+        error={error}
       />
       <TextField
         className={styles.input}
@@ -106,6 +129,7 @@ function CardEdit(props: ICardEditProps) {
         variant="outlined"
         value={employeeSigDate}
         onChange={(evt) => setEmployeeSigDate(evt.target.value)}
+        error={error}
       />
       <TextField
         className={styles.input}
@@ -113,6 +137,7 @@ function CardEdit(props: ICardEditProps) {
         variant="outlined"
         value={companySignatureName}
         onChange={(evt) => setCompanySignatureName(evt.target.value)}
+        error={error}
       />
       <TextField
         className={styles.input}
@@ -120,6 +145,7 @@ function CardEdit(props: ICardEditProps) {
         variant="outlined"
         value={companySigDate}
         onChange={(evt) => setCompanySigDate(evt.target.value)}
+        error={error}
       />
       <Button
         className={styles.button}

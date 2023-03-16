@@ -11,8 +11,11 @@ export interface IResponseToken extends IResponse {
   data: { token: string };
 }
 
-export interface IData {
-  id?: string;
+export interface IResponseSet extends IResponse {
+  data: IData;
+}
+
+export interface ISetData {
   documentStatus?: string;
   employeeNumber?: string;
   documentType?: string;
@@ -21,6 +24,10 @@ export interface IData {
   employeeSignatureName?: string;
   employeeSigDate?: string;
   companySigDate?: string;
+}
+
+export interface IData extends ISetData {
+  id?: string;
 }
 
 export interface ILoginData {

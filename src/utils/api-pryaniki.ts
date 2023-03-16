@@ -1,6 +1,6 @@
 import { HOST } from "./constants";
 import { getWithExpiry } from "./localstorage";
-import { ILoginData } from "./types";
+import { ILoginData, ISetData } from "./types";
 
 const headersContentType = { 'Content-Type': 'application/json' };
 const headersAuthorization = () => ({
@@ -18,7 +18,7 @@ function request(endpoint: string, options: RequestInit) {
   return fetch(`${HOST}${endpoint}`, options).then(checkResponse);
 }
 
-// Login
+// Запрос для авторизации (метод - POST):
 export function singIn(data: ILoginData) {
   const options = {
     method: 'POST',
@@ -29,7 +29,7 @@ export function singIn(data: ILoginData) {
   return request('/ru/data/v3/testmethods/docs/login', options);
 };
 
-// Получение данных для карточек
+// Запрос для получения массива данных для таблицы (метод - GET):
 export function getData() {
   const options = {
     method: 'GET',
@@ -37,4 +37,15 @@ export function getData() {
   };
 
   return request('/ru/data/v3/testmethods/docs/userdocs/get', options);
+}
+
+// Запрос для изменения записи(метод POST):
+export function setData(id: string, data: ISetData) {
+  const options = {
+    method: 'POST',
+    headers: headersAuthorization(),
+    body: JSON.stringify(data),
+  };
+
+  return request(`/ru/data/v3/testmethods/docs/userdocs/set/${id}`, options);
 }

@@ -7,6 +7,7 @@
   --label-color: #dbeafe;
   --text-label-color: #2563eb;
   --text-color: #475569;
+  --text-err-color: #d32f2f;
 }
 
 body {

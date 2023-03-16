@@ -20,32 +20,45 @@ function Login() {
     } else {
       setEmptyInput(false);
     }
-  }, [valueEmail, valuePassword])
+  }, [valueEmail, valuePassword]);
 
   const handleSubmit = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     setError(false);
-    setTextError("");
+    setTextError('');
 
     try {
-      const response = await singIn({ username: valueEmail, password: valuePassword }) as IResponseToken;
-
-      setWithExpiry('auth_token', response.data.token, 1000*60*60*24);
-      setWithExpiry('user', valueEmail, 1000*60*60*24);
-
-      context.setCurrentUser({
+      const response = (await singIn({
         username: valueEmail,
-        loggedIn: true,
-      })
+        password: valuePassword,
+      })) as IResponseToken;
 
-      if (response.error_code === 2004) {
-        setError(true);
-        setTextError("Неверный логин или пароль");
+      switch (response.error_code) {
+        case 0:
+          setWithExpiry('auth_token', response.data.token, 1000 * 60 * 60 * 24);
+          setWithExpiry('user', valueEmail, 1000 * 60 * 60 * 24);
+
+          context.setCurrentUser({
+            username: valueEmail,
+            loggedIn: true,
+          });
+
+          break;
+        case 2004:
+          setError(true);
+          setTextError('Неверный логин или пароль');
+
+          break;
+        default:
+          setError(true);
+          setTextError(`Код ошибки ${response.error_code}`);
+
+          break;
       }
     } catch (error) {
       setError(true);
-      setTextError("Произошла ошибка");
+      setTextError('Произошла ошибка запроса');
 
       console.error(error);
     }
@@ -71,7 +84,12 @@ function Login() {
           error={error}
           helperText={textError}
         />
-        <Button className={styles.button} type="submit" variant="contained" disabled={emptyInput}>
+        <Button
+          className={styles.button}
+          type="submit"
+          variant="contained"
+          disabled={emptyInput}
+        >
           Вход
         </Button>
       </form>
