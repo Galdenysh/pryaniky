@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/pryaniky/static/css/main.d20ccf7e.css",
+    "main.js": "/pryaniky/static/js/main.19f2a201.js",
+    "static/media/logo-face.svg": "/pryaniky/static/media/logo-face.89662c5795fefb163e02fc19f2782bdb.svg",
+    "index.html": "/pryaniky/index.html",
+    "main.d20ccf7e.css.map": "/pryaniky/static/css/main.d20ccf7e.css.map",
+    "main.19f2a201.js.map": "/pryaniky/static/js/main.19f2a201.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d20ccf7e.css",
+    "static/js/main.19f2a201.js"
+  ]
+}
