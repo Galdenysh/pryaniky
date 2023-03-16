@@ -1,3 +1,5 @@
+import { Button } from '@mui/material';
+import { MouseEvent } from 'react';
 import { convertDate } from '../../utils/funcs';
 import { IData } from '../../utils/types';
 import styles from './data-card.module.css';
@@ -5,10 +7,14 @@ import styles from './data-card.module.css';
 interface IDataCardProps {
   data: IData;
   onClick: () => void;
+  handleRemove: (
+    evt: MouseEvent<HTMLButtonElement>,
+    id: string | undefined,
+  ) => Promise<void>;
 }
 
 function DataCard(props: IDataCardProps) {
-  const { data, onClick } = props;
+  const { data, onClick, handleRemove } = props;
 
   return (
     <article className={styles.content} onClick={onClick}>
@@ -21,13 +27,25 @@ function DataCard(props: IDataCardProps) {
       <ul className={styles.list}>
         <li className={styles.listItem}>
           <p className={styles.text}>{data.employeeSignatureName}</p>
-          <p className={`${styles.text} ${styles.mt8}`}>{convertDate(data.employeeSigDate)}</p>
+          <p className={`${styles.text} ${styles.mt8}`}>
+            {convertDate(data.employeeSigDate)}
+          </p>
         </li>
         <li className={styles.listItem}>
           <p className={styles.text}>{data.companySignatureName}</p>
-          <p className={`${styles.text} ${styles.mt8}`}>{convertDate(data.companySigDate)}</p>
+          <p className={`${styles.text} ${styles.mt8}`}>
+            {convertDate(data.companySigDate)}
+          </p>
         </li>
       </ul>
+      <Button
+        className={styles.button}
+        color="error"
+        variant="contained"
+        onClick={(evt) => handleRemove(evt, data.id)}
+      >
+        Удалить
+      </Button>
     </article>
   );
 }

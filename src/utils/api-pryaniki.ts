@@ -50,6 +50,16 @@ export function createData(data: ISetData) {
   return request(`/ru/data/v3/testmethods/docs/userdocs/create`, options);
 }
 
+// Запрос для удаления записи(метод - POST):
+export function deleteData(id: string) {
+  const options = {
+    method: 'POST',
+    headers: headersAuthorization(),
+  };
+
+  return request(`/ru/data/v3/testmethods/docs/userdocs/delete/${id}`, options);
+}
+
 // Запрос для изменения записи(метод POST):
 export function setData(id: string, data: ISetData) {
   const options = {
